@@ -8,15 +8,63 @@ There has been some debate about whether it is appropriate to
 
 This may not be true. It's easy to imagine a scenario where a modelled fire impacts on assets before the Bayes net is included, 
 
+An alternative way of looking at the scenario is that the Phoenix fire footprint and losses represent a worst case scenario for the modelled weather and ignition, and the Bayes net is downscaling the _likelihood_ of the worst case occurring. 
+
 Demonstration of a process for new allocating risk outputs from new Bushfire Risk Analysis Framework to:
 * the locations where the risk of loss occurs (impact risk)
 * the fire paths that contribute to risk of loss (spread risk)
 * treatable areas within these fire paths for prioritising fuel management over long (e.g. fire management zoning/strategies) or short (e.g. JFMP) timeframes. 
 
 
+### 1. Calculate fire areas and Phoenix house losses
+   Note: fire area here needs to be consistent with the footrint within which house loss could occur in the new house loss model. That is, it is the area burnt, plus the area that isn't burnt but records an ember density > 0.5.
+
+with
+bayesnet as (select * from bayesnettable),
+allcells_wx01 as (select *, 'wx01' as weather from phoenixtable1.cell),
+allcells_wx02 as (select *, 'wx01' as weather from phoenixtable2.cell),
+allcells_wx03 as (select *, 'wx01' as weather from phoenixtable3.cell),
+allcells_wx04 as (select *, 'wx01' as weather from phoenixtable4.cell),
+allcells_wx05 as (select *, 'wx01' as weather from phoenixtable5.cell),
+allcells_wx06 as (select *, 'wx01' as weather from phoenixtable6.cell),
+allcells_wx07 as (select *, 'wx01' as weather from phoenixtable7.cell),
+allcells_wx08 as (select *, 'wx01' as weather from phoenixtable8.cell),
+allcells_wx09 as (select *, 'wx01' as weather from phoenixtable9.cell),
+allcells_wx10 as (select *, 'wx01' as weather from phoenixtable10.cell),
+
+bn_losses as
+   ignitionid,
+   houseloss_bn
+   
+fire_summary as
+   weather,
+   ignitionid,
+   fire_area_cells,
+   houseloss_phx,
+   houseloss_bn,
+   cast(houseloss_bn as real)/cast(houseloss_ph as real) as weight_bn,
+   cast(houseloss_bn as real)/cast(fire_area_cells as real) as cell_bn_contribution
+   
+cell_risk_ign_wx as
+   cellid,
+   ignitionid,
+   weather,
+   cell_houseloss_phx,
+   cell_houseloss_phx * weight_bn as cell_houseloss_bn,
+   cell_bn_contribution,
+   cell_bn_contribution * treatable as cell_bn_contribution_treatable,
+   locality,
+   lga,
+   delwp_district
+   
+where cell intensity > 0 or emberdensity > 0.5
+   
 
 
-### 1. Prepare spatial data in ArcGIS
+
+
+
+   
    1. Ensure required fields exist and are populated. These fields are:
        * name        - name of the burn
        * treatment_  - coded id of the burn, including district and type
