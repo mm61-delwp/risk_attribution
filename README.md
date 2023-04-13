@@ -19,6 +19,7 @@ Demonstration of a process for new allocating risk outputs from new Bushfire Ris
 ### 1. Spread Risk - allocate house loss risk to fire paths
 
 **Example query to calculate the contribution of each 180m grid cell to phoenix and bayes net house losses:**
+
 Requires:
 * Bayes net output - replace bn_jfmp_2025_no_jfmp_2cd658671c434fcaa7254f0cfe3fc99 with job id
 * Rank 1 to 10 weather scenarios - replace jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb with group id
@@ -48,6 +49,7 @@ hl_cell as (
     union select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb10.hl_cell where sum_hl_int > 0
     ),
 
+-- select house loss field from bayes net table (!!Note: if houseloss_mean_res is not the best measure to use, replace it!!)
 bn_losses as (
     select
         ignition_id as ignitionid,
@@ -56,6 +58,7 @@ bn_losses as (
         bayesnet
     ),
 
+-- sum phoenix losses (house loss model) to weather and ignition 
 phx_losses as (
     select
         weather,
@@ -151,10 +154,12 @@ allcells as(
 -- summarise to cellid by summing each cell's contribution to bayes net and phoenix losses for all ignitions and weather scenarios
 select 
     cell.cellid, cell.x_coord, cell.y_coord,
-    sum(a.phx_contribution) as phx_contribution,
-    sum(a.bn_contribution) as bn_contribution
+    sum(coalesce(a.phx_contribution, 0)) as phx_contribution,
+    sum(coalesce(a.bn_contribution, 0)) as bn_contribution
 from
     reference_brau.grid_cell_180m cell left join allcells a on a.cellid = cell.cellid
+where
+    state = 'Victoria'
 group by
     cell.cellid, cell.x_coord, cell.y_coord
 ```
