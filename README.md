@@ -183,3 +183,6 @@ It can't be used for prioritising fuel treatment by planned burning, as it does 
 [INSERT DEMONSTRATION]
 
 ### 3. Impact Risk - allocate risk to location of modelled house loss
+
+**Logic diagram**
+![image](https://user-images.githubusercontent.com/100050237/231670125-882eb713-0f91-4d51-a3e8-6ee68b1ead21.png)
