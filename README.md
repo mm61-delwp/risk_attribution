@@ -169,7 +169,9 @@ group by
 The spread risk method demonstrated above tells us about the contribution of each part of the state to house loss risk.
 It can't be used for prioritising fuel treatment by planned burning, as it does not consider whether the risk can be mitigated by planned burning.
 
-    * drop grid cells where treatability = 0
-    * sum phx_contribution and bn_contribution to burn units (or other geographic units as required)
+* drop grid cells where treatability = 0
+* sum phx_contribution and bn_contribution to burn units (or other geographic units as required)
+
+[INSERT DEMONSTRATION]
 
 ### 3. Impact Risk - allocate risk to location of modelled house loss
