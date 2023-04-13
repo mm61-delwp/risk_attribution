@@ -16,9 +16,9 @@ Demonstration of a process for new allocating risk outputs from new Bushfire Ris
 * treatable areas within these fire paths for prioritising fuel management over long (e.g. fire management zoning/strategies) or short (e.g. JFMP) timeframes. 
 
 
-### 1. Calculate fire areas and Phoenix house losses
+### 1. Spread Risk - grid cell contribution to house losses
 
-Example query to calculate the contribution of each 180m grid cell to phoenix and bayes net house losses
+**Example query to calculate the contribution of each 180m grid cell to phoenix and bayes net house losses:**
 ```sql
 with
 bayesnet as (select * from bn_jfmp_2025_no_jfmp_2cd658671c434fcaa7254f0cfe3fc99d.bn_ignition_summary),
@@ -157,10 +157,10 @@ from
 group by
     cell.cellid, cell.x_coord, cell.y_coord
 ```
-Map of cell contribution to Phoenix house losses (log scale symbology)
+**Map of cell contribution to Phoenix house losses (log scale symbology):**
 ![image](https://user-images.githubusercontent.com/100050237/231617783-5aad7885-f4b7-4fee-a0af-123148cebb77.png)
 
-Map of cell contribution to Bayes net house losses (log scale symbology)
-![image](https://user-images.githubusercontent.com/100050237/231618261-5aed7e5c-78a3-4f67-a6cd-2119e6e9f638.png)
+**Map of cell contribution to Bayes net house losses (log scale symbology):**
+![image](https://user-images.githubusercontent.com/100050237/231621018-7c33b135-18ab-4578-b883-cf2134675703.png)
 
-
+### 2. Treatable Spread Risk - grid cell treatable contribution to house losses
