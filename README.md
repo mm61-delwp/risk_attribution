@@ -20,9 +20,12 @@ Demonstration of a process for new allocating risk outputs from new Bushfire Ris
 
 **Example query to calculate the contribution of each 180m grid cell to phoenix and bayes net house losses:**
 
+
 Requires:
 * Bayes net output - replace bn_jfmp_2025_no_jfmp_2cd658671c434fcaa7254f0cfe3fc99 with job id
 * Rank 1 to 10 weather scenarios - replace jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb with group id
+
+> Note: This query takes time to run due to the amount of data it reads - The below example = Run time: 8 min 17.608 sec    Data scanned: 781.37 GB
 ```sql
 with
 bayesnet as (select * from bn_jfmp_2025_no_jfmp_2cd658671c434fcaa7254f0cfe3fc99d.bn_ignition_summary),
