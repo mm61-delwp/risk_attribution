@@ -18,6 +18,10 @@ Demonstration of a process for new allocating risk outputs from new Bushfire Ris
 
 ### 1. Spread Risk - allocate house loss risk to fire paths
 
+**Logic Diagram**
+![image](https://user-images.githubusercontent.com/100050237/231761477-edcd9176-a9b7-49c3-81e8-bc8ca17619d3.png)
+
+
 **Example query to calculate the contribution of each 180m grid cell to phoenix and bayes net house losses:**
 
 
@@ -185,7 +189,7 @@ It can't be used for prioritising fuel treatment by planned burning, as it does 
 ### 3. Impact Risk - allocate risk to location of modelled house loss
 
 **Logic diagram**
-![image](https://user-images.githubusercontent.com/100050237/231670125-882eb713-0f91-4d51-a3e8-6ee68b1ead21.png)
+![image](https://user-images.githubusercontent.com/100050237/231761967-a8ac05b5-faf9-4663-8c93-21a8a491b21a.png)
 
 
 ```sql
