@@ -10,11 +10,11 @@ This may not be true. It's easy to imagine a scenario where a modelled fire impa
 
 An alternative way of looking at the scenario is that the Phoenix fire footprint and losses represent a worst case scenario for the modelled weather and ignition, and the Bayes net is downscaling the _likelihood_ of the worst case occurring. 
 
-Demonstration of a process for new allocating risk outputs from new Bushfire Risk Analysis Framework to:
-* the locations where the risk of loss occurs (impact risk)
+Demonstration of a process for new allocating risk outputs from new Bushfire Risk Modelling Framework to:
+* the ignitions that cause the risk of house loss (ignition risk) - not shown here as it is the standard output 
 * the fire paths that contribute to risk of loss (spread risk)
-* treatable areas within these fire paths for prioritising fuel management over long (e.g. fire management zoning/strategies) or short (e.g. JFMP) timeframes. 
-
+* the locations where the risk of loss occurs (impact risk)
+* treatable areas within fire paths for prioritising fuel management over long (e.g. fire management zoning/strategies) or short (e.g. JFMP) timeframes. 
 
 ### 1. Spread Risk - allocate house loss risk to fire paths
 
