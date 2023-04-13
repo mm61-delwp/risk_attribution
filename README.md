@@ -167,10 +167,10 @@ group by
     cell.cellid, cell.x_coord, cell.y_coord
 ```
 **Map of cell contribution to Phoenix house losses (log scale symbology):**
-![image](https://user-images.githubusercontent.com/100050237/231617783-5aad7885-f4b7-4fee-a0af-123148cebb77.png)
+![image](https://user-images.githubusercontent.com/100050237/231656481-fe64eea4-7771-49cc-a1ce-0339a420ffdb.png)
 
 **Map of cell contribution to Bayes net house losses (log scale symbology):**
-![image](https://user-images.githubusercontent.com/100050237/231621018-7c33b135-18ab-4578-b883-cf2134675703.png)
+![image](https://user-images.githubusercontent.com/100050237/231657140-6e3b6215-d368-428f-9d85-cf02297cb493.png)
 
 ### 2. Treatable Spread Risk - treatable contribution to house losses
 
