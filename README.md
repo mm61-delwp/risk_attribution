@@ -30,26 +30,26 @@ Requires:
 with
 bayesnet as (select * from bn_jfmp_2025_no_jfmp_2cd658671c434fcaa7254f0cfe3fc99d.bn_ignition_summary),
 allcells_wx01 as (select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb1.cell where intensity > 0 or emberdensity > 0.5),
-allcells_wx02 as (select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb2.cell where intensity > 0 or emberdensity > 0.5),
-allcells_wx03 as (select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb3.cell where intensity > 0 or emberdensity > 0.5),
-allcells_wx04 as (select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb4.cell where intensity > 0 or emberdensity > 0.5),
-allcells_wx05 as (select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb5.cell where intensity > 0 or emberdensity > 0.5),
-allcells_wx06 as (select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb6.cell where intensity > 0 or emberdensity > 0.5),
-allcells_wx07 as (select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb7.cell where intensity > 0 or emberdensity > 0.5),
-allcells_wx08 as (select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb8.cell where intensity > 0 or emberdensity > 0.5),
-allcells_wx09 as (select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb9.cell where intensity > 0 or emberdensity > 0.5),
-allcells_wx10 as (select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb10.cell where intensity > 0 or emberdensity > 0.5),
+allcells_wx02 as (select *, 'wx02' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb2.cell where intensity > 0 or emberdensity > 0.5),
+allcells_wx03 as (select *, 'wx03' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb3.cell where intensity > 0 or emberdensity > 0.5),
+allcells_wx04 as (select *, 'wx04' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb4.cell where intensity > 0 or emberdensity > 0.5),
+allcells_wx05 as (select *, 'wx05' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb5.cell where intensity > 0 or emberdensity > 0.5),
+allcells_wx06 as (select *, 'wx06' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb6.cell where intensity > 0 or emberdensity > 0.5),
+allcells_wx07 as (select *, 'wx07' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb7.cell where intensity > 0 or emberdensity > 0.5),
+allcells_wx08 as (select *, 'wx08' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb8.cell where intensity > 0 or emberdensity > 0.5),
+allcells_wx09 as (select *, 'wx09' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb9.cell where intensity > 0 or emberdensity > 0.5),
+allcells_wx10 as (select *, 'wx10' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb10.cell where intensity > 0 or emberdensity > 0.5),
 hl_cell as (
     select *,       'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb1.hl_cell where sum_hl_int > 0
-    union select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb2.hl_cell where sum_hl_int > 0
-    union select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb3.hl_cell where sum_hl_int > 0
-    union select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb4.hl_cell where sum_hl_int > 0
-    union select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb5.hl_cell where sum_hl_int > 0
-    union select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb6.hl_cell where sum_hl_int > 0
-    union select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb7.hl_cell where sum_hl_int > 0
-    union select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb8.hl_cell where sum_hl_int > 0
-    union select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb9.hl_cell where sum_hl_int > 0
-    union select *, 'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb10.hl_cell where sum_hl_int > 0
+    union select *, 'wx02' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb2.hl_cell where sum_hl_int > 0
+    union select *, 'wx03' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb3.hl_cell where sum_hl_int > 0
+    union select *, 'wx04' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb4.hl_cell where sum_hl_int > 0
+    union select *, 'wx05' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb5.hl_cell where sum_hl_int > 0
+    union select *, 'wx06' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb6.hl_cell where sum_hl_int > 0
+    union select *, 'wx07' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb7.hl_cell where sum_hl_int > 0
+    union select *, 'wx08' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb8.hl_cell where sum_hl_int > 0
+    union select *, 'wx09' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb9.hl_cell where sum_hl_int > 0
+    union select *, 'wx10' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb10.hl_cell where sum_hl_int > 0
     ),
 
 -- select house loss field from bayes net table (!!Note: if houseloss_mean_res is not the best measure to use, replace it!!)
