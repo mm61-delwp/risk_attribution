@@ -157,4 +157,10 @@ from
 group by
     cell.cellid, cell.x_coord, cell.y_coord
 ```
-    
+Map of cell contribution to Phoenix house losses (log scale symbology)
+![image](https://user-images.githubusercontent.com/100050237/231617783-5aad7885-f4b7-4fee-a0af-123148cebb77.png)
+
+Map of cell contribution to Bayes net house losses (log scale symbology)
+![image](https://user-images.githubusercontent.com/100050237/231618261-5aed7e5c-78a3-4f67-a6cd-2119e6e9f638.png)
+
+
