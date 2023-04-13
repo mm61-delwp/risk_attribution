@@ -186,3 +186,79 @@ It can't be used for prioritising fuel treatment by planned burning, as it does 
 
 **Logic diagram**
 ![image](https://user-images.githubusercontent.com/100050237/231670125-882eb713-0f91-4d51-a3e8-6ee68b1ead21.png)
+
+
+```sql
+with
+bayesnet as (select * from bn_jfmp_2025_no_jfmp_2cd658671c434fcaa7254f0cfe3fc99d.bn_ignition_summary),
+hl_cell as (
+    select *,       'wx01' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb1.hl_cell where sum_hl_int > 0
+    union select *, 'wx02' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb2.hl_cell where sum_hl_int > 0
+    union select *, 'wx03' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb3.hl_cell where sum_hl_int > 0
+    union select *, 'wx04' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb4.hl_cell where sum_hl_int > 0
+    union select *, 'wx05' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb5.hl_cell where sum_hl_int > 0
+    union select *, 'wx06' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb6.hl_cell where sum_hl_int > 0
+    union select *, 'wx07' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb7.hl_cell where sum_hl_int > 0
+    union select *, 'wx08' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb8.hl_cell where sum_hl_int > 0
+    union select *, 'wx09' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb9.hl_cell where sum_hl_int > 0
+    union select *, 'wx10' as weather from jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb10.hl_cell where sum_hl_int > 0
+    ),
+
+bn_losses as (
+    select
+        ignition_id as ignitionid,
+        houseloss_mean_res as ignition_houseloss_bn
+    from
+        bayesnet
+    ),
+
+phx_losses as (
+    select
+        weather,
+        ignitionid,
+        sum(sum_hl_int) as ignition_houseloss_phx
+    from
+        hl_cell
+    group by
+        weather,
+        ignitionid
+    ),
+
+-- join the Bayes net and Phoenix house losses to the ignition summary table and calculate the proportional difference (weight_bn)
+ignition_summary as(
+    select 
+        ph.ignitionid,
+        --ph.weather,
+        ph.ignition_houseloss_phx as ignition_houseloss_phx,
+        avg(bn.ignition_houseloss_bn) as ignition_houseloss_bn,
+        cast(avg(bn.ignition_houseloss_bn) as real)/cast(ph.ignition_houseloss_phx as real) as weight_bn
+    from 
+        phx_losses ph left join bn_losses bn on bn.ignitionid = ph.ignitionid
+    group by
+        ph.ignitionid,
+        --ph.weather,
+        ph.ignition_houseloss_phx
+    ),
+
+-- join weight_bn to phoenix grid cell losses
+loss_cells as(
+    select ph.cellid, ph.ignitionid, ph.weather, 
+        ph.sum_hl_int as hl_original, 
+        ph.sum_hl_int * i.weight_bn as hl_adjusted
+    from hl_cell ph inner join ignition_summary i on i.ignitionid = ph.ignitionid --and i.weather = ph.weather
+    group by ph.cellid, ph.ignitionid, ph.weather, ph.sum_hl_int, i.weight_bn
+    )
+    
+-- summarise to cellid by summing all losses in the cell
+select 
+    cell.cellid, cell.x_coord, cell.y_coord,
+    cell.delwp_region, cell.delwp_district, cell.lga, cell.locality,
+    sum(coalesce(a.hl_original, 0)) as houseloss_original,
+    sum(coalesce(a.hl_adjusted, 0)) as houseloss_adjusted
+from
+    reference_brau.grid_cell_180m cell inner join loss_cells a on a.cellid = cell.cellid
+where
+    state = 'Victoria'
+group by
+    cell.cellid, cell.x_coord, cell.y_coord
+```
