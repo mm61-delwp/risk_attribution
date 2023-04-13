@@ -19,6 +19,9 @@ Demonstration of a process for new allocating risk outputs from new Bushfire Ris
 ### 1. Spread Risk - grid cell contribution to house losses
 
 **Example query to calculate the contribution of each 180m grid cell to phoenix and bayes net house losses:**
+Requires:
+* Bayes net output - replace bn_jfmp_2025_no_jfmp_2cd658671c434fcaa7254f0cfe3fc99 with job id
+* Rank 1 to 10 weather scenarios - replace jfmp_2023_2022fh_2km_nojfmp_v2_70deb0b6f5524cb98570dfdc875189eb with group id
 ```sql
 with
 bayesnet as (select * from bn_jfmp_2025_no_jfmp_2cd658671c434fcaa7254f0cfe3fc99d.bn_ignition_summary),
@@ -163,4 +166,10 @@ group by
 **Map of cell contribution to Bayes net house losses (log scale symbology):**
 ![image](https://user-images.githubusercontent.com/100050237/231621018-7c33b135-18ab-4578-b883-cf2134675703.png)
 
-### 2. Treatable Spread Risk - grid cell treatable contribution to house losses
+### 2. Treatable Spread Risk - treatable contribution to house losses
+
+The spread risk method demonstrated above tells us about the contribution of each part of the state to house loss risk.
+It can't be used for prioritising fuel treatment by planned burning, as it does not consider whether the risk can be mitigated by planned burning.
+
+    * drop grid cells where treatability = 0
+    * sum phx_contribution and bn_contribution to burn units (or other geographic units as required)
