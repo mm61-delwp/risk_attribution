@@ -214,13 +214,11 @@ bn_losses as (
 
 phx_losses as (
     select
-        weather,
         ignitionid,
         sum(sum_hl_int) as ignition_houseloss_phx
     from
         hl_cell
     group by
-        weather,
         ignitionid
     ),
 
@@ -243,11 +241,11 @@ loss_cells as(
     select ph.cellid, ph.ignitionid, ph.weather, 
         ph.sum_hl_int as hl_original, 
         ph.sum_hl_int * i.weight_bn as hl_adjusted
-    from hl_cell ph inner join ignition_summary i on i.ignitionid = ph.ignitionid
+    from hl_cell ph inner join ignition_summary i on i.ignitionid = ph.ignitionid --and i.weather = ph.weather
     group by ph.cellid, ph.ignitionid, ph.weather, ph.sum_hl_int, i.weight_bn
     )
     
--- summarise to cellid by summing all losses in the cell
+-- summarise to cellid by summing losses in the cell from all ignitions
 select 
     cell.cellid, cell.x_coord, cell.y_coord,
     cell.delwp_region, cell.delwp_district, cell.lga, cell.locality,
