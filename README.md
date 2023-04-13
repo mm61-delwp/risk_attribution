@@ -228,7 +228,6 @@ phx_losses as (
 ignition_summary as(
     select 
         ph.ignitionid,
-        --ph.weather,
         ph.ignition_houseloss_phx as ignition_houseloss_phx,
         avg(bn.ignition_houseloss_bn) as ignition_houseloss_bn,
         cast(avg(bn.ignition_houseloss_bn) as real)/cast(ph.ignition_houseloss_phx as real) as weight_bn
@@ -236,7 +235,6 @@ ignition_summary as(
         phx_losses ph left join bn_losses bn on bn.ignitionid = ph.ignitionid
     group by
         ph.ignitionid,
-        --ph.weather,
         ph.ignition_houseloss_phx
     ),
 
@@ -245,7 +243,7 @@ loss_cells as(
     select ph.cellid, ph.ignitionid, ph.weather, 
         ph.sum_hl_int as hl_original, 
         ph.sum_hl_int * i.weight_bn as hl_adjusted
-    from hl_cell ph inner join ignition_summary i on i.ignitionid = ph.ignitionid --and i.weather = ph.weather
+    from hl_cell ph inner join ignition_summary i on i.ignitionid = ph.ignitionid
     group by ph.cellid, ph.ignitionid, ph.weather, ph.sum_hl_int, i.weight_bn
     )
     
