@@ -16,7 +16,7 @@ Demonstration of a process for new allocating risk outputs from new Bushfire Ris
 * treatable areas within these fire paths for prioritising fuel management over long (e.g. fire management zoning/strategies) or short (e.g. JFMP) timeframes. 
 
 
-### 1. Spread Risk - grid cell contribution to house losses
+### 1. Spread Risk - allocate house loss risk to fire paths
 
 **Example query to calculate the contribution of each 180m grid cell to phoenix and bayes net house losses:**
 Requires:
@@ -68,7 +68,6 @@ phx_losses as (
         ignitionid
     ),
 
-
 -- create ignition table with a count of 'fire area' (not burnt area) cells
 ignition_num_cells as (
     select weather, ignitionid, count(cellid) as fire_area_cells from allcells_wx01 group by weather, ignitionid
@@ -82,7 +81,6 @@ ignition_num_cells as (
     union select weather, ignitionid, count(cellid) as fire_area_cells from allcells_wx09 group by weather, ignitionid
     union select weather, ignitionid, count(cellid) as fire_area_cells from allcells_wx10 group by weather, ignitionid
     ),
-
 
 -- join the Bayes net and Phoenix house losses to the ignition summary table and divide phoenix and bayes net losses among fire area cells 
 -- note that Phoenix losses are per weather/ignition combination and Bayes net losses are per ignition (the BN combines weathers)
@@ -173,3 +171,5 @@ It can't be used for prioritising fuel treatment by planned burning, as it does 
 
     * drop grid cells where treatability = 0
     * sum phx_contribution and bn_contribution to burn units (or other geographic units as required)
+
+### 3. Impact Risk - allocate risk to location of modelled house loss
