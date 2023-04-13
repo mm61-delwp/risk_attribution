@@ -258,5 +258,5 @@ from
 where
     state = 'Victoria'
 group by
-    cell.cellid, cell.x_coord, cell.y_coord
+    cell.cellid, cell.x_coord, cell.y_coord, cell.delwp_region, cell.delwp_district, cell.lga, cell.locality
 ```
