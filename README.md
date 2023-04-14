@@ -262,3 +262,6 @@ where
 group by
     cell.cellid, cell.x_coord, cell.y_coord, cell.delwp_region, cell.delwp_district, cell.lga, cell.locality
 ```
+
+**Example Impact Risk Maps - Locality**
+![image](https://user-images.githubusercontent.com/100050237/231909752-7fb09c23-744d-4103-bd74-1ce2ce9c803a.png)
