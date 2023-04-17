@@ -4,11 +4,8 @@ The new bushfire risk modelling framework allocates bushfire risk to modelled bu
 
 This poses some challenges for communicating risk. For example, people within a locality, shire or district expect the risk data we provide them to reflect bushfire risk _to_ assets in their locality, shire or district, not the risk _from_ ignitions within their footprint pose assets which may be outside their area of interest.
 
-There has been some debate about whether it is appropriate to 
+There has been some debate about whether it is appropriate to use Bayes Net outputs in the way described below. The aim here is to demonstrate _how_ it can be done, not show that it _should be_ done. 
 
-This may not be true. It's easy to imagine a scenario where a modelled fire impacts on assets before the Bayes net is included, 
-
-An alternative way of looking at the scenario is that the Phoenix fire footprint and losses represent a worst case scenario for the modelled weather and ignition, and the Bayes net is downscaling the _likelihood_ of the worst case occurring. 
 
 Demonstration of a process for new allocating risk outputs from new Bushfire Risk Modelling Framework to:
 * the ignitions that cause the risk of house loss (ignition risk) - not shown here as it is the standard output 
